@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="span-12">
+	<div class="span-8">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'wyszukiwarka',
@@ -8,7 +8,16 @@
 		'default',
 		true) ?>">Znajdz Przedmiot</a>
 	</div>
-	<div class="span-12">
+	<div class="span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'wyszukiwarka',
+	       	        'action'    =>'wyszukaj'
+		),
+		'default',
+		true) ?>">Znajdz Przedmiot</a>
+	</div>
+	<div class="span-8 last">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'wyszukiwarka',
