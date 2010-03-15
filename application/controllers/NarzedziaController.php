@@ -32,12 +32,16 @@ class NarzedziaController extends Zend_Controller_Action {
 		if ($this->getRequest()->isPost()) {
   			$formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
-				$url = $form->getValue('url');
-				$wyszukana = new Application_Model_Parser();
-				$tabela = $wyszukana->findMonitor($url);
-				$monitor = new Application_Model_DbTable_Monitory();
-   			    $monitor->addMonitor('Samsung', $tabela[0], $tabela[1], $tabela[2], $tabela[5]);
-   			    $this->_redirect('/');					
+				if (($this->getRequest()->getParam('producent')) === 'samsung') {
+					$szukana = $form->getValue('nazwa');
+					$wyszukana = new Application_Model_ParserSamsung();
+					$tabela = $wyszukana->findMonitor($szukana);
+					if (isset($tabela['Rozmiar'])) {					
+						$monitor = new Application_Model_DbTable_Monitory();
+   					    $monitor->addMonitor('Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)']);
+   					    $this->_redirect('/');					
+					} else echo '<div class="container"><div class="append-8 span-8 prepend-8 prepend-top"><h3>Nic nie znaleziono</h3></div></div>';
+				} else echo '<div class="container"><div class="append-8 span-8 prepend-8 prepend-top"><h3>Nic nie znaleziono</h3></div></div>';
 			}		
 		}
 			
