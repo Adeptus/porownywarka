@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+	       	        'action'    =>'find'
+		),
+		'default',
+		true) ?>">Znajdz Przedmiot</a>
+	</div>
+	<div class="span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+	       	        'action'    =>'search'
+		),
+		'default',
+		true) ?>">Lista przedmiotow</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+	       	        'action'    =>'search'
+		),
+		'default',
+		true) ?>">Wyszukaj Przedmioty po parametrach</a>
+	</div>
+
+</div>
