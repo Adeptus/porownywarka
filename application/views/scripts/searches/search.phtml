@@ -1,31 +1,31 @@
 <div class="container">
-<div class="prepend-2 span-22 prepend-top last">
-<p><a href="<?php echo $this->url(array('controller'=>'searches',
-          'action'=>'add'));?>">dodaj nowy przedmiot</a></p>
-</div>
-<div class="prepend-5 span-19 last">
-<table>
-<tr>
-     <th>Producent</th>
-     <th>Nazwa</th>
-     <th>Opcje</th>
-</tr>
-<?php foreach($this->monitory as $monitor) : ?>
-<tr>
-	<td><?php echo $this->escape($monitor->marka);?></td>
-	<td><?php echo $this->escape($monitor->nazwa);?></td>
-        <td>
-	<a href="<?php echo $this->url(array('controller'=>'searches',
-              'action'=>'show', 'id'=>$monitor->id));?>">Wyswietl</a>	
-	<a href="<?php echo $this->url(array('controller'=>'monitors',
-              'action'=>'edit', 'id'=>$monitor->id));?>">Edit</a>
-        <a href="<?php echo $this->url(array('controller'=>'monitors',
-              'action'=>'delete', 'id'=>$monitor->id));?>">Delete</a>
-        <a href="<?php echo $this->url(array('controller'=>'searches',
-              'action'=>'', 'id'=>$monitor->id));?>">Dodaj do porownywanych</a>
-	</td>
-</tr>
-<?php endforeach; ?>
-</table>
-</div>
+	<div class="span-6 prepend-top last">
+		<?php
+		$this->form->setAction($this->url());
+		echo $this->form;
+		?>
+	</div>
+	<div class="span-18 prepend-top">	
+	<? if ($this->monitor) {?>
+			<div class="span-9"><h3>Producent:</h3></div><div class="span-9 last"><h3><strong><? echo $this->monitor[marka]; ?></strong></h3></div>
+			<div class="span-9"><h3>Nazwa:</h3></div><div class="span-9 last"><h3><strong><? echo $this->monitor[nazwa]; ?></strong></h3></div>
+		</div>
+		<div class="span-18 last">
+			<table>
+				<tr>
+					<td>Jasnosc:</td>
+					<td><?php echo $this->monitor[Jasnosc];?></td>
+				</tr>
+				<tr>
+					<td>Cale:</td>
+					<td><?php echo $this->monitor[Cale];?></td>
+				</tr>
+				<tr>
+					<td>Reakcja matrycy:</td>
+					<td><?php echo $this->monitor[Reakcja];?></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<? } ?>
 </div>

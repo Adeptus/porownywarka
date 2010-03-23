@@ -9,7 +9,7 @@ class SearchesController extends Zend_Controller_Action {
 	public function searchAction() {
 	   	$id = $this->_getParam('id', 0);
   		if ($id > 0) {
-			$this->show($id);
+			$this->showAction($id);
 		} else {
 			$monitory = new Application_Model_DbTable_Monitory();
 			$this->view->monitory = $monitory->fetchAll();

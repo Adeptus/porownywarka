@@ -1,30 +1,72 @@
 <div class="container">
-	<div class="span-8">
+	<div class="span-12">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'searches',
-	       	        'action'    =>'find'
+	       	        'action'    =>'search'
 		),
 		'default',
 		true) ?>">Znajdz Przedmiot</a>
 	</div>
-	<div class="span-8">
+	<div class="span-12 last">
 	<a href="<?php echo $this->url(
 		array(
-			'controller'=>'searches',
-	       	        'action'    =>'search'
+			'controller'=>'monitors',
+	       	        'action'    =>'add'
 		),
 		'default',
-		true) ?>">Lista przedmiotow</a>
-	</div>
-	<div class="span-8 last">
-	<a href="<?php echo $this->url(
-		array(
-			'controller'=>'searches',
-	       	        'action'    =>'search'
-		),
-		'default',
-		true) ?>">Wyszukaj Przedmioty po parametrach</a>
+		true) ?>">dodaj nowy przedmiot</a>
 	</div>
 
+</div>
+<div class="container">
+<? if ($this->monitor) {?>
+	<div class="container">
+		<div class="append-6 span-12 prepend-6 prepend-top">	
+			<div class="span-6"><h3>Producent:</h3></div><div class="span-6 last"><h3><strong><? echo $this->monitor[marka]; ?></strong></h3></div>
+			<div class="span-6"><h3>Nazwa:</h3></div><div class="span-6 last"><h3><strong><? echo $this->monitor[nazwa]; ?></strong></h3></div>
+		</div>
+		<div class="append-6 span-12 prepend-6 last">
+			<table>
+				<tr>
+					<td>Jasnosc:</td>
+					<td><?php echo $this->monitor[Jasnosc];?></td>
+				</tr>
+				<tr>
+					<td>Cale:</td>
+					<td><?php echo $this->monitor[Cale];?></td>
+				</tr>
+				<tr>
+					<td>Reakcja matrycy:</td>
+					<td><?php echo $this->monitor[Reakcja];?></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<? } ?>
+	<div class="prepend-5 span-19 prepend-top last">
+		<table>
+			<tr>
+				 <th>Producent</th>
+				 <th>Nazwa</th>
+				 <th>Opcje</th>
+			</tr>
+			<?php foreach($this->monitory as $monitor) : ?>
+			<tr>
+				<td><?php echo $this->escape($monitor->marka);?></td>
+				<td><?php echo $this->escape($monitor->nazwa);?></td>
+				<td>
+				<a href="<?php echo $this->url(array('controller'=>'searches',
+					      'action'=>'index', 'id'=>$monitor->id));?>">Wyswietl</a>	
+				<a href="<?php echo $this->url(array('controller'=>'monitors',
+					      'action'=>'edit', 'id'=>$monitor->id));?>">Edit</a>
+					<a href="<?php echo $this->url(array('controller'=>'monitors',
+					      'action'=>'delete', 'id'=>$monitor->id));?>">Delete</a>
+					<a href="<?php echo $this->url(array('controller'=>'searches',
+					      'action'=>'', 'id'=>$monitor->id));?>">Dodaj do porownywanych</a>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	</div>
 </div>
