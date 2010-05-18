@@ -12,7 +12,6 @@ class Application_Form_Search extends Zend_Form {
 		
 		$this->addElement('text', 'nazwa', array(
 			'label'      =>	'Znajdz po nazwie:',
-//			'required'   =>   true,
 			'filters'    =>   array('StringTrim'),
 		));
 

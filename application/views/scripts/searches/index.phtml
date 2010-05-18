@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="span-12">
+	<div class="span-8">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'searches',
@@ -8,43 +8,57 @@
 		'default',
 		true) ?>">Znajdz Przedmiot</a>
 	</div>
-	<div class="span-12 last">
+	<div class="span-8">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
 	       	        'action'    =>'add'
 		),
 		'default',
-		true) ?>">dodaj nowy przedmiot</a>
+		true) ?>">Dodaj nowy przedmiot</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
 	</div>
 
-</div>
-<div class="container">
 <? if ($this->monitor) {?>
-	<div class="container">
-		<div class="append-6 span-12 prepend-6 prepend-top">	
-			<div class="span-6"><h3>Producent:</h3></div><div class="span-6 last"><h3><strong><? echo $this->monitor[marka]; ?></strong></h3></div>
-			<div class="span-6"><h3>Nazwa:</h3></div><div class="span-6 last"><h3><strong><? echo $this->monitor[nazwa]; ?></strong></h3></div>
-		</div>
-		<div class="append-6 span-12 prepend-6 last">
-			<table>
-				<tr>
-					<td>Jasnosc:</td>
-					<td><?php echo $this->monitor[Jasnosc];?></td>
-				</tr>
-				<tr>
-					<td>Cale:</td>
-					<td><?php echo $this->monitor[Cale];?></td>
-				</tr>
-				<tr>
-					<td>Reakcja matrycy:</td>
-					<td><?php echo $this->monitor[Reakcja];?></td>
-				</tr>
-			</table>
-		</div>
+	<div class="append-3 span-18 prepend-3 prepend-top">	
+		<table>
+			<tr>
+				<div class="span-6"><th><h3>Producent:</h3></th></div>
+				<div class="span-6"><td><h3><strong><? echo $this->monitor[marka]; ?></strong></h3></td></div>
+				<div class="span-6 last"><td><h3><strong><? echo $this->monitor2[marka]; ?></strong></h3></td></div>
+			</tr>
+			<tr>	
+				<div class="span-6"><th><h3>Nazwa:</h3></th></div>
+				<div class="span-6"><td><h3><strong><? echo $this->monitor[nazwa]; ?></strong></h3></td></div>
+				<div class="span-6 last"><td><h3><strong><? echo $this->monitor2[nazwa]; ?></strong></td></h3></div>
+			</tr>
+			<tr>
+				<div class="span-6"><th>Jasnosc:</th></div>
+				<div class="span-6"><td><?php echo $this->monitor[Jasnosc];?></td></div>
+				<div class="span-6 last"><td><?php echo $this->monitor2[Jasnosc];?></td></div>
+			</tr>
+			<tr>
+				<div class="span-6"><th>Cale:</th></div>
+				<div class="span-6"><td><?php echo $this->monitor[Cale];?></td></div>
+				<div class="span-6 last"><td><?php echo $this->monitor2[Cale];?></td></div>
+			</tr>
+			<tr>
+				<div class="span-6"><th>Reakcja matrycy:</th></div>
+				<div class="span-6"><td><?php echo $this->monitor[Reakcja];?></td></div>
+				<div class="span-6 last"><td><?php echo $this->monitor2[Reakcja];?></td></div>
+			</tr>
+		</table>
 	</div>
 <? } ?>
-	<div class="prepend-5 span-19 prepend-top last">
+	<div class="prepend-3 span-21 prepend-top last">
 		<table>
 			<tr>
 				 <th>Producent</th>
@@ -63,7 +77,7 @@
 					<a href="<?php echo $this->url(array('controller'=>'monitors',
 					      'action'=>'delete', 'id'=>$monitor->id));?>">Delete</a>
 					<a href="<?php echo $this->url(array('controller'=>'searches',
-					      'action'=>'', 'id'=>$monitor->id));?>">Dodaj do porownywanych</a>
+					      'action'=>'index', 'id2'=>$monitor->id));?>">Dodaj do porownywanych</a>
 				</td>
 			</tr>
 		<?php endforeach; ?>

@@ -1,4 +1,23 @@
 <div class="container">
+	<div class="span-12">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona Porownywania</a>
+	</div>
+	<div class="span-12 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
+	</div>
+
 	<div class="span-6 prepend-top last">
 		<?php
 		$this->form->setAction($this->url());

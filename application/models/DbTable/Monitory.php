@@ -8,16 +8,16 @@ class Application_Model_DbTable_Monitory extends Zend_Db_Table_Abstract
 		$id = (int)$id;
 		$row = $this->fetchRow('id='.$id);
 		if (!$row) {
-			throw new Expection("Nie znaleziono produktu o id = $id");
+			return null;
 		}
 		return $row->toArray();
 	}
 
 	public function get2Monitor($nazwa) {
-		$nazwa = (string)$nazwa;
+		$nazwa = (int)$nazwa;
 		$row = $this->fetchRow('nazwa='.$nazwa);
 		if (!$row) {
-			throw new Expection("Nie znaleziono produktu o nazwie = $nazwa");
+			return null;
 		}
 		return $row->toArray();
 	}

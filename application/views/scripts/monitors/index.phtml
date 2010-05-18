@@ -1,5 +1,24 @@
 <div class="container">
-	<div class="span-6">
+	<div class="prepend-6 span-9">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona porownywania</a>
+	</div>
+	<div class="span-9 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
+	</div>
+
+	<div class="prepend-2 span-6 prepend-top">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
@@ -8,7 +27,7 @@
 		'default',
 		true) ?>">Dodaj Przedmiot</a>
 	</div>
-	<div class="span-6">
+	<div class="span-6 prepend-top">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
@@ -17,7 +36,7 @@
 		'default',
 		true) ?>">Dodaj Przedmiot po nazwie</a>
 	</div>
-	<div class="span-6">
+	<div class="span-6 prepend-top">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
@@ -26,7 +45,7 @@
 		'default',
 		true) ?>">Edytuj Przedmioty</a>
 	</div>
-	<div class="span-6 last">
+	<div class="span-4 prepend-top last">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
