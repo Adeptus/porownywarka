@@ -39,7 +39,7 @@ class MonitorsController extends Zend_Controller_Action {
 					if (isset($tabela['Rozmiar'])) {					
 						$monitor = new Application_Model_DbTable_Monitory();
    					    $monitor->addMonitor('Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)']);
-   					    $this->_redirect('/');					
+   					    $this->_redirect('/searches/index/');					
 					} else $this->redirect('/monitors/add/id/1');
 				} else $this->redirect('/monitors/add/id/2');
 			}

@@ -14,7 +14,7 @@ class Application_Model_DbTable_Monitory extends Zend_Db_Table_Abstract
 	}
 
 	public function get2Monitor($nazwa) {
-		$nazwa = (int)$nazwa;
+		$nazwa = (float)$nazwa;
 		$row = $this->fetchRow('nazwa='.$nazwa);
 		if (!$row) {
 			return null;

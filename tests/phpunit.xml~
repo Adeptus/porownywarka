@@ -6,7 +6,7 @@
     <whitelist>
       <directory suffix=".php">../application/</directory>
       <exclude>
-        <file>../application/Bootstrap.php</file>
+
         <file>../application/controllers/ErrorController.php</file>
       </exclude>
     </whitelist>

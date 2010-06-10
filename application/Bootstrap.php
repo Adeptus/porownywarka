@@ -12,9 +12,9 @@ public function _initDbNames()
 	{
 	    try {
 	    $config = array(
-	        'host'     => 'sql109.xtreemhost.com',
-	        'username' => 'xth_5188134','password' => 'koza1401',
-	        'dbname'   => 'xth_5188134_porownywarka',
+	        'host'     => 'localhost',
+	        'username' => 'root','password' => 'koza',
+	        'dbname'   => 'porownywarka3',
     );
 	    $db = Zend_Db::factory('PDO_MYSQL', $config);
 	    Zend_Db_Table::setDefaultAdapter($db);
