@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_DbTable_Monitory extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Monitory extends Application_Model_DatabaseGateway
 {
 	protected $_name    = 'monitory';
 
@@ -22,8 +22,9 @@ class Application_Model_DbTable_Monitory extends Zend_Db_Table_Abstract
 		return $row->toArray();
 	}
 
-	public function addMonitor($marka, $nazwa, $cale, $jasnosc, $reakcja) {
+	public function addMonitor($id = null, $marka, $nazwa, $cale, $jasnosc, $reakcja) {
 		$data = array(
+			'id'   => $id,
 			'marka'   => $marka,
 			'nazwa'   => $nazwa,
 			'Cale'    => $cale,

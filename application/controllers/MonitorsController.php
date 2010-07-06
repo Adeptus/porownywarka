@@ -18,7 +18,7 @@ class MonitorsController extends Zend_Controller_Action {
     	    	$jasnosc = $form->getValue('Jasnosc');
     	    	$reakcja = $form->getValue('Reakcja');
    	 		    $monitor = new Application_Model_DbTable_Monitory();
-   			    $monitor->addMonitor($marka, $nazwa, $cale, $jasnosc, $reakcja);
+   			    $monitor->addMonitor(null, $marka, $nazwa, $cale, $jasnosc, $reakcja);
    			    $this->_redirect('/');
    			} else {
      		   $form->populate($formData);
@@ -38,7 +38,7 @@ class MonitorsController extends Zend_Controller_Action {
 					$tabela = $wyszukana->findMonitor($szukana);
 					if (isset($tabela['Rozmiar'])) {					
 						$monitor = new Application_Model_DbTable_Monitory();
-   					    $monitor->addMonitor('Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)']);
+   					    $monitor->addMonitor(null, 'Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)']);
    					    $this->_redirect('/searches/index/');					
 					} else $this->redirect('/monitors/add/id/1');
 				} else $this->redirect('/monitors/add/id/2');

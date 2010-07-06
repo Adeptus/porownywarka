@@ -41,7 +41,7 @@
 				<div class="span-6 last"><td><h3><strong><? echo $this->monitor2[nazwa]; ?></strong></td></h3></div>
 			</tr>
 			<tr>
-				<div class="span-6"><th>Jasnosc:</th></div>
+				<div class="span-6"><th>Jasnosc(cd/m2):</th></div>
 				<div class="span-6"><td><?php echo $this->monitor[Jasnosc];?></td></div>
 				<div class="span-6 last"><td><?php echo $this->monitor2[Jasnosc];?></td></div>
 			</tr>
@@ -51,10 +51,16 @@
 				<div class="span-6 last"><td><?php echo $this->monitor2[Cale];?></td></div>
 			</tr>
 			<tr>
-				<div class="span-6"><th>Reakcja matrycy:</th></div>
+				<div class="span-6"><th>Reakcja matrycy(ms):</th></div>
 				<div class="span-6"><td><?php echo $this->monitor[Reakcja];?></td></div>
 				<div class="span-6 last"><td><?php echo $this->monitor2[Reakcja];?></td></div>
 			</tr>
+			<? if ($this->cena) {?>
+			<tr>
+				<div class="span-6"><th>Cena od(zł):</th></div>
+				<div class="span-6"><td><?php echo $this->cena;?></td></div>
+				<div class="span-6 last"><td><?php echo $this->cena2;?></td></div>
+			<? } ?>
 		</table>
 	</div>
 <? } ?>

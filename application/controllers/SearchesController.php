@@ -12,6 +12,7 @@ class SearchesController extends Zend_Controller_Action {
 		} else if ($id > 0) {
 			$monitor   = $this->show_one($id);
 			$monitory  = $this->show_all();
+			$cena      = $this->find_price_monitor($monitor);
 		} else {
 			$monitory = $this->show_all();
 		}
@@ -32,12 +33,16 @@ class SearchesController extends Zend_Controller_Action {
 
 	private function show_one($id) {
 			$monitor = new Application_Model_DbTable_Monitory();
-			$this->view->monitor = $monitor->getMonitor($id);
+			$szukany = $monitor->getMonitor($id);
+			$this->view->monitor = $szukany;
+			$this->view->cena = $this->find_price_monitor($szukany);
 	}
 
 	private function show_second($id2) {
 			$monitor2 = new Application_Model_DbTable_Monitory();
-			$this->view->monitor2 = $monitor2->getMonitor($id2);
+			$szukany = $monitor2->getMonitor($id2);
+			$this->view->monitor2 = $szukany;
+			$this->view->cena2 = $this->find_price_monitor($szukany);
 	}
 
 	private function show_all() {
@@ -48,6 +53,13 @@ class SearchesController extends Zend_Controller_Action {
 	private function show_one_by_name($nazwa) {
 			$monitor = new Application_Model_DbTable_Monitory();
 			$this->view->monitor = $monitor->get2Monitor($nazwa);
+	}
+
+	private function find_price_monitor($monitor)
+	{
+		$cena    = new Application_Model_ParserCeny();
+		$cenamonitora    = $cena->getCena($monitor[marka], $monitor[nazwa]);
+		return $cenamonitora;
 	}
 
 }

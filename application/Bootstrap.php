@@ -8,6 +8,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->doctype('XHTML1_STRICT');
 	}
 
+    protected function _initDatabases(){
+    $resource = $this->getPluginResource('multidb');
+    $resource->init();
+
+    $db1 = $resource->getDb('db1');
+    $db2 = $resource->getDb('db2');
+
+    Zend_Registry::set( 'test' , $db1 );
+    Zend_Registry::set( 'default' , $db2 );
+    }
+/*
+	public function _initDbNames()
+	{
+		$dupa = new Zend_Db_Adapter_Abstract();
+		$resource = $this->dupa->getPluginResource('multidb');
+		$db1 = $resource->getDb('db1');
+		$db2 = $resource->getDb('db2');
+		// jeśli ustawiliśmy defaultowe połączenie, wystarczy wpisać
+		$deafaultDb = $resource->getDb();
+	}
+*/
+/*
 public function _initDbNames()
 	{
 	    try {
@@ -23,6 +45,6 @@ public function _initDbNames()
 	        echo "Blad polaczenia z baza danych: ".$e->getMessage();
 	        exit(0);
 	    }
-	}
+	}*/
 }
 

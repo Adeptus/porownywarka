@@ -11,9 +11,9 @@ class MonitorsControllerTest extends ControllerTestCase
 
 	public function testAddAction()
 	{		
-        $this->dispatch('/monitors');
+        $this->dispatch('/monitors/add');
         $this->assertController('monitors');
-        $this->assertAction('index');
+        $this->assertAction('add');
 	}
 
 }
