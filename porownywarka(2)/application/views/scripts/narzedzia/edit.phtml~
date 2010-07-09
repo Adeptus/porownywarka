@@ -1,0 +1,7 @@
+<div class="container">
+	<div class="append-5 span-14 prepend-5 prepend-top">
+	<h3>Wpisz id przedmiotu i wypelnij wszystkie pola:</h3>
+	<?php $this->form->setAction($this->url());
+	echo $this->form;?>
+	</div>
+</div>

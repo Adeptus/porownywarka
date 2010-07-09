@@ -1,0 +1,18 @@
+<?php
+
+class MonitorsControllerTest extends ControllerTestCase
+{
+    public function testIndexAction()
+    {
+        $this->dispatch('/index');
+        $this->assertAction('index');
+    }
+
+	public function testAddAction()
+	{		
+        $this->dispatch('/monitors/add');
+        $this->assertAction('add');
+	}
+
+}
+

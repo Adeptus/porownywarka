@@ -1,0 +1,32 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<? $this->headLink()->appendStylesheet('/css/screen.css' , 'screen, projection'); ?>
+	<? $this->headLink()->appendStylesheet('/css/ie.css', 'screen, projection' , 'IE'); ?>
+	<? $this->headLink()->appendStylesheet('/css/print.css' , 'print'); ?>
+	<? $this->headLink()->appendStylesheet('/css/main.css'); ?>
+
+	<? echo $this->headLink(); ?>
+	<title>Porownywarka Parametrow</title>
+</head>
+<body>
+<div class="container">
+	<div class="span-24 layout last">
+	<h2>POROWNYWARKA PARAMETROW</h2>
+	</div>
+</div>
+<div class="container">
+	<div class="span-24">
+<?php echo $this->layout()->content ?>
+</div>
+</div>
+</body>
+<footer>
+<div class="container">
+	<div class="span-24 layout">
+	<h3>Mariusz Kozieł</h3>
+	</div>
+</div>
+</footer>
+</html>

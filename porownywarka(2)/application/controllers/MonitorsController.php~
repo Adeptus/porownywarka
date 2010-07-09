@@ -12,22 +12,14 @@ class MonitorsController extends Zend_Controller_Action {
 		if ($this->getRequest()->isPost()) {
   			$formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
-    	    	$marka 		   = $form->getValue('marka');
-    	    	$nazwa         = $form->getValue('nazwa');
-    	    	$cale          = $form->getValue('Cale');
-    	    	$jasnosc       = $form->getValue('Jasnosc');
-    	    	$reakcja       = $form->getValue('Reakcja');
-    	    	$kontrast      = $form->getValue('Kontrast');
-    	    	$rozdzielczosc = $form->getValue('Rozdzielczosc');
-    	    	$katy 		   = $form->getValue('Katy');
-    	    	$kolor		   = $form->getValue('Kolor');
-    	    	$pobor		   = $form->getValue('Pobor');
-    	    	$czuwanie	   = $form->getValue('Czuwanie');
-    	    	$waga 		   = $form->getValue('Waga');
-
-				$monitor = new Application_Model_DbTable_Monitory();
-   			    $monitor->addMonitor(null, $marka, $nazwa, $cale, $jasnosc, $reakcja, $kontrast, $rozdzielczosc, $katy, $kolor, $pobor, $czuwanie, $waga);
-   			    $this->_redirect('/');
+    	    	$marka = $form->getValue('marka');
+    	    	$nazwa = $form->getValue('nazwa');
+    	    	$cale = $form->getValue('Cale');
+    	    	$jasnosc = $form->getValue('Jasnosc');
+    	    	$reakcja = $form->getValue('Reakcja');
+   	 		    $monitor = new Application_Model_DbTable_Monitory();
+   			    $monitor->addMonitor($marka, $nazwa, $cale, $jasnosc, $reakcja);
+   			    $this->_redirect('/monitors/edit/id/1');
    			} else {
      		   $form->populate($formData);
    		}
@@ -46,10 +38,10 @@ class MonitorsController extends Zend_Controller_Action {
 					$tabela = $wyszukana->findMonitor($szukana);
 					if (isset($tabela['Rozmiar'])) {					
 						$monitor = new Application_Model_DbTable_Monitory();
-   					    $monitor->addMonitor(null, 'Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)'],$tabela['Kontrast'], $tabela['Rozdzielczość'], $tabela['Kąty widoczności (poziomo/pionowo)'], $tabela['Kolor obrazu'], $tabela['Włączony'], $tabela['Tryb czuwania (DPMS)'], $tabela['Netto (kg)']);
+   					    $monitor->addMonitor('Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)']);
    					    $this->_redirect('/searches/index/');					
-					} else $this->redirect('/monitors/add/');
-				} else $this->redirect('/monitors/add/');
+					} else $this->redirect('/monitors/add/id/1');
+				} else $this->redirect('/monitors/add/id/2');
 			}
 		}
 			
@@ -61,22 +53,14 @@ class MonitorsController extends Zend_Controller_Action {
 		if ($this->getRequest()->isPost()) {
   			$formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
-				$id			   = $form->getValue('id');
-    	    	$marka         = $form->getValue('marka');
-    	    	$nazwa         = $form->getValue('nazwa');
-    	    	$cale          = $form->getValue('Cale');
-    	    	$jasnosc       = $form->getValue('Jasnosc');
-    	    	$reakcja       = $form->getValue('Reakcja');
-    	    	$kontrast      = $form->getValue('Kontrast');
-    	    	$rozdzielczosc = $form->getValue('Rozdzielczosc');
-    	    	$katy 		   = $form->getValue('Katy');
-    	    	$kolor		   = $form->getValue('Kolor');
-    	    	$pobor		   = $form->getValue('Pobor');
-    	    	$czuwanie	   = $form->getValue('Czuwanie');
-    	    	$waga 		   = $form->getValue('Waga');
-
+				$id = $form->getValue('id');
+    	    	$marka = $form->getValue('marka');
+    	    	$nazwa = $form->getValue('nazwa');
+    	    	$cale = $form->getValue('Cale');
+    	    	$jasnosc = $form->getValue('Jasnosc');
+    	    	$reakcja = $form->getValue('Reakcja');
     		    $monitor = new Application_Model_DbTable_Monitory();
-   			    $monitor->updateMonitor($id, $marka, $nazwa, $cale, $jasnosc, $reakcja, $kontrast, $rozdzielczosc, $katy, $kolor, $pobor, $czuwanie, $waga);
+   			    $monitor->updateMonitor($id, $marka, $nazwa, $cale, $jasnosc, $reakcja);
    			    $this->_redirect('/');
    			} else {
     	 	   $form->populate($formData);
