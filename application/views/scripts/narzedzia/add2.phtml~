@@ -1,6 +1,0 @@
-<div class="container">
-	<div class="append-5 span-14 prepend-5 prepend-top">
-	<?php $this->form->setAction($this->url());
-	echo $this->form;?>
-	</div>
-</div>
