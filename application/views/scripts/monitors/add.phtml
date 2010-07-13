@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="prepend-6 span-9">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'monitors',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona Edycji</a>
+	</div>
+	<div class="span-9 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
+	</div>
+
+	<div class="append-5 span-14 prepend-5 prepend-top">
+		<?php $this->form->setAction($this->url());
+		echo $this->form;?>
+	</div>
+</div>
