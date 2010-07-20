@@ -13,8 +13,17 @@ class MonitorsController extends Zend_Controller_Action {
   			$formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
 				$monitor = new Application_Model_DbTable_Monitors();
-   			    $monitor->addMonitor(null, $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $form->getValue('Kontrast'), $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
-   			    $this->_redirect('/');
+   			    $addMonitor = $monitor->addMonitor(null, $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $form->getValue('Kontrast'), $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
+                if ($addMonitor  === true) { 
+                    $monitor_id = $monitor->getMonitorByName($form->getValue('nazwa'));  			    
+                    $this->_redirect('/searches/index/monitor_id/'.$monitor_id['id']);
+                } else if ($addMonitor  === $error1) { 
+                	$this->view->error = $addMonitor;
+           		    $form->populate($formData);             
+                } else {
+                	$this->view->error = $addMonitor;
+           		    $form->populate($formData);
+                }
    			} else {
      		   $form->populate($formData);
    		    }

@@ -17,13 +17,11 @@ class Application_Model_ParserSamsung {
 		$nazwa = array();
 		$a = $dom1->getElementsByTagName('a');
 
-		foreach ($a as $a)
-		    {
+		foreach ($a as $a) {
 			$class = $a->getAttribute('class');
 			$href  = $a->getAttribute('href');
-
 			$nazwa[$class] = $href;
-	    	}		
+	   	}		
 		$nazwa2 = $nazwa['arrow_blue'];		
 		$url = "$nazwa2&tab=specification";
 
@@ -43,22 +41,19 @@ class Application_Model_ParserSamsung {
 		$nazwa = $dom2->getElementsByTagName('h1');
 		$tabela['nazwa'] = $nazwa->item(0)->nodeValue;
 
-		    $rows = $dom2->getElementsByTagName('tr');
-  
-			foreach ($rows as $row)
-			    {
-				$th = $row->getElementsByTagName('th');
-				$nazwa = $th->item(0)->nodeValue;
-				$nazwa2 = $th->item(1)->nodeValue;
+	    $rows = $dom2->getElementsByTagName('tr');
+		foreach ($rows as $row) {
+    		$th = $row->getElementsByTagName('th');
+			$nazwa = $th->item(0)->nodeValue;
+			$nazwa2 = $th->item(1)->nodeValue;
 	
-				$td = $row->getElementsByTagName('td');
-				$wartosc = $td->item(0)->nodeValue;
+			$td = $row->getElementsByTagName('td');
+			$wartosc = $td->item(0)->nodeValue;
 
-				$tabela[trim($nazwa)] = trim($wartosc);
-				$tabela[trim($nazwa2)] = trim($wartosc);
-		    	}
-			return $tabela;
-			//} else echo 'dupa';
-		} 
+			$tabela[trim($nazwa)] = trim($wartosc);
+			$tabela[trim($nazwa2)] = trim($wartosc);
+    	}
+		return $tabela;
+	} 
 }
 ?> 

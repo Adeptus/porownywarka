@@ -1,9 +1,8 @@
 <?php
 
-class Application_Model_ParserPrice
-{
-	public function getPrice($marka, $nazwa)
-	{
+class Application_Model_ParserPrice {
+   
+	public function getPrice($marka, $nazwa) {
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, "http://www.ceneo.pl/Monitory;004+s$marka~~M$nazwa");
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
