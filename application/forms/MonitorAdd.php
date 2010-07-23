@@ -18,12 +18,15 @@ class Application_Form_MonitorAdd extends Zend_Form {
 			'required'   =>   true,
 			'filters'    =>   array('StringTrim'),
 		));
+ $name = new Zend_Form_Element_Text('Cale');
 
 		$this->addElement('text', 'Cale', array(
 			'value'      =>  $cale,
 			'label'      =>	'Podaj wielkosc matryce w calach:',
 			'required'   =>   true,
+            'validators' =>  array('alnum', array('regex', false, array('/^[0-9][0-9]$/'))),
 			'filters'    =>   array('StringTrim'),
+            'ErrorMessages' => array("Wartos moze skladac sie tylko z dwuch cyfr."),
 		));
 
 		$this->addElement('text', 'Jasnosc', array(
