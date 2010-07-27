@@ -7,7 +7,7 @@ class Application_Form_Search extends Zend_Form {
 
 		$this->addElement('text', 'id', array(
 			'label'      =>	'Znajdz po id:',
-			'filters'    =>   array('StringTrim'),
+            'validators' =>  array('int')
 		));
 		
 		$this->addElement('text', 'nazwa', array(

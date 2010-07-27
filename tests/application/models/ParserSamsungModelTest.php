@@ -13,4 +13,10 @@ class ParserSamsungModelTest extends ControllerTestCase
 //		$monitor = $this->parser->findMonitor('2443NW');
 //        $this->assertNotNull($monitor);
     }
+
+    public function test_functionRemoveAllWrongValueFromTable() {
+        $tableToCheck = array('Kontrast' => 'sraka na bosaka 10 0 0:1 (032 lo l)', 'Rozdzielczość' => '1 1 1 1      x 2522');
+        $correctTable = $this->parser->removeAllWrongValueFromTable($tableToCheck);
+        $this->assertEquals('1000:1', $correctTable['Kontrast']);
+    }   
 }

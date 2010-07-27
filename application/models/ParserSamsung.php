@@ -53,7 +53,23 @@ class Application_Model_ParserSamsung {
 			$tabela[trim($nazwa)] = trim($wartosc);
 			$tabela[trim($nazwa2)] = trim($wartosc);
     	}
-		return $tabela;
+
+        $correctTable = $this->removeAllWrongValueFromTable($tabela);
+
+        return $correctTable;
 	} 
+
+    public function removeAllWrongValueFromTable($tabela) {
+        
+        $rozdzielczosc = str_replace(' ', '', $tabela['Rozdzielczość']);
+        $tabela['Rozdzielczość'] = $rozdzielczosc;
+
+        $ToReplaceInKontrast = array('/[a-zA-Z]/', '/\\(.*\\)/');
+        $kontrast = preg_replace($ToReplaceInKontrast, '', $tabela['Kontrast']);
+        $tabela['Kontrast'] = str_replace(' ', '', $kontrast);
+
+        return $tabela;
+    
+    }
 }
 ?> 

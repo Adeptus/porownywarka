@@ -55,6 +55,10 @@ class MonitorsModelTest extends ControllerTestCase
         $this->assertEquals(2, $monitors_id[0]);        
     }  
 
+    public function test_getIdsByParametersWithWrongParameter() {
+        $this->assertNull($this->model->getIdsByParameters('Jasnosc', 'aaa'));
+    }  
+
     public function test_getIdsByParametersWithSecondParameterMin() {
         $monitors_id = $this->model->getIdsByParameters('Rozdzielczosc', '20000:1 (1000:1)', 'min');
         $this->assertEquals(2, $monitors_id[0]);
@@ -66,6 +70,10 @@ class MonitorsModelTest extends ControllerTestCase
         $this->assertEquals(2, $monitors_id[0]);
         $this->assertEquals(3, $monitors_id[1]);        
     }   
+
+    public function test_getIdsByParametersWithParameterNotFind() {
+        $this->assertNull($this->model->getIdsByParameters('Jasnosc', '4', 'min'));
+    } 
 
     public function test_getIdsByParametersWithSecondParameterBetween() {
         $monitors_id = $this->model->getIdsByParameters('Kontrast', '1 100 x 1 500', 'between', '1 200 x 2 222');

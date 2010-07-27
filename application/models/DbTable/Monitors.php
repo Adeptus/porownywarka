@@ -80,14 +80,14 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
                 ->where($parameter.'>= ?', $value_parameter)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
-            return $tabelaWithId = $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
+            return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
         } else if($option === "max") {
             $select = $this->select()
                 ->from ('monitory', 'id')
                 ->where($parameter.'<= ?', $value_parameter)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
-            return $tabelaWithId = $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
+            return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
         } else if ($option === "between") { 
             $select = $this->select()
                 ->from ('monitory', 'id')
@@ -95,21 +95,25 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
                 ->where($parameter.'<= ?', $value_parameter2)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
-            return $tabelaWithId = $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
+            return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
         } else {
             $select = $this->select()
                 ->from ('monitory', 'id')
                 ->where($parameter.'= ?', $value_parameter)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
-            return $tabelaWithId = $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
+            return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
         }
     }
     
     private function changeMonitorsIdsTableToTableWithId($monitorsIdsTable) {
-        foreach ($monitorsIdsTable as $monitorId) {
-            $tabelaWithId[] = $monitorId['id'];
-        }	
-        return $tabelaWithId;
+        if (!empty($monitorsIdsTable[0])) {
+            foreach ($monitorsIdsTable as $monitorId) {
+                $tabelaWithId[] = $monitorId['id'];
+            }	
+            return $tabelaWithId;
+        } else {
+            return null;
+        }
     }
 }?>
