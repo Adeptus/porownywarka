@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="prepend-6 span-9">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'monitors',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona Edycji</a>
+	</div>
+	<div class="span-9 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
+	</div>
+
+	<div class="span-6 prepend-top append-bottom">
+		<h3><?php echo $this->error;?></h3>
+        <?php $this->form->setAction($this->url());
+		echo $this->form;?>
+	</div>
+<? if ($this->monitory) {?>
+	<div class="span-18 prepend-top last">
+		<table>
+			<tr>
+				 <th>Producent</th>
+				 <th>Nazwa</th>
+				 <th>Cale</th>
+				 <th>Jasnosc</th>
+				 <th>Opcje</th>
+			</tr>
+			<?php foreach($this->monitory as $monitor) : ?>
+			<tr>
+				<td><?php echo $this->escape($monitor->marka);?></td>
+				<td><?php echo $this->escape($monitor->nazwa);?></td>
+				<td><?php echo $this->escape($monitor->Cale);?></td>
+				<td><?php echo $this->escape($monitor->Jasnosc);?></td>
+				<td>
+				<a href="<?php echo $this->url(array('controller'=>'monitors',
+					      'action'=>'edit', 'id'=>$monitor->id));?>">Edit</a>
+    			<a href="<?php echo $this->url(array('controller'=>'monitors',
+					      'action'=>'delete', 'id'=>$monitor->id));?>">Delete</a>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	</div>
+<? } ?>
+</div>

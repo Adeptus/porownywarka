@@ -3,40 +3,42 @@
 class Application_Form_MonitorAdd extends Zend_Form {
 
 	public function init() {
+
 		$this->setMethod('post');
-		
+        $this->setAttrib('id', 'subscribe-form');		
 		$this->addElement('text', 'marka', array(
-			'value'      =>  $marka,
 			'label'      =>	'Podaj nazwe producenta:',
 			'required'   =>   true,
 			'filters'    =>   array('StringTrim'),
 		));
 
 		$this->addElement('text', 'nazwa', array(
-			'value'      =>  $nazwa,
 			'label'      =>	'Podaj nazwe produktu:',
 			'required'   =>   true,
 			'filters'    =>   array('StringTrim'),
 		));
 
 		$this->addElement('text', 'Cale', array(
-			'value'      =>  $cale,
+//			'value'      =>  $cale,
 			'label'      =>	'Podaj wielkosc matryce w calach:',
 			'required'   =>   true,
-            'validators' =>  array('alnum', array('regex', true, array('/^[0-9]{1,2}$/'))),
-            'ErrorMessages' => array("Wartos moze skladac sie maxymalnie z dwuch cyfr."),
+            'validators' =>  array(array('regex', true, array('/^[0-9]{2}(\,|\.)?[0-9]?$/'))),
+            'ErrorMessages' => array("Wartos moze skladac sie z dwuch cyfr(oraz ewentualnej liczby po przecinku)"),
+//            'style'    => 'width: 4em; height: 1,5em;',
+            'maxlength'   => 4,
 		));
 
 		$this->addElement('text', 'Jasnosc', array(
-			'value'      =>  $jasnosc,
+//			'value'      =>  $jasnosc,
 			'label'      =>	'Podaj Jasnosc(cd/m2):',
 			'required'   =>   true,
             'validators' =>  array('int'),
             'ErrorMessages' => array("Wartos moze skladac sie tylko z cyfr."),
+//            'style'    => 'width: 4em; height: 1,5em;',
 		));
 
 		$this->addElement('text', 'Reakcja', array(
-			'value'      =>  $reakcja,
+//			'value'      =>  $reakcja,
 			'label'      =>	'Podaj czas reakcji matrycy(sek):',
 			'required'   =>   true,
             'validators' =>  array('int'),
@@ -44,11 +46,11 @@ class Application_Form_MonitorAdd extends Zend_Form {
 		));
 
 		$this->addElement('text', 'Kontrast', array(
-			'value'      =>  $kontrast,
+//			'value'      =>  $kontrast,
 			'label'      =>	'Podaj kontrast(x:1):',
 			'required'   =>   true,
             'validators' =>  array('alnum', array('regex', true, array('/^[0-9]{2,7}$/'))),
-            'ErrorMessages' => array("Wartos moze skladac sie tylko z cyfr."),
+            'ErrorMessages' => array("Wartos moze skladac sie tylko z cyfr(min.2 max.7)"),
 		));
 
         $options = array(
@@ -76,38 +78,38 @@ class Application_Form_MonitorAdd extends Zend_Form {
         );
 
 		$this->addElement('select', 'Rozdzielczosc', array(
-			'value'      =>  $rozdzielczosc['id'],
+//			'value'      =>  $rozdzielczosc,
 			'label'      =>	'Podaj rozdzielczosc:',
 			'required'   =>   true,
             'MultiOptions' => $options,
 		));
 
 		$this->addElement('text', 'Katy', array(
-			'value'      =>  $katy,
+//			'value'      =>  $katy,
 			'label'      =>	'Podaj katy widocznosc (poziomo stopni/pionowo stopni):',
 			'filters'    =>   array('StringTrim'),
 		));
 
 		$this->addElement('text', 'Kolor', array(
-			'value'      =>  $kolor,
+//			'value'      =>  $kolor,
 			'label'      =>	'Podaj kolor obrazu(mln):',
 			'filters'    =>   array('StringTrim'),
 		));
 
 		$this->addElement('text', 'Pobor', array(
-			'value'      =>  $pobor,
+//			'value'      =>  $pobor,
 			'label'      =>	'Podaj pobor prądu(kw):',
 			'filters'    =>   array('StringTrim'),
 		));
 
 		$this->addElement('text', 'Czuwanie', array(
-			'value'      =>  $czuwanie,
+//			'value'      =>  $czuwanie,
 			'label'      =>	'Podaj pobor prądu podczas czuwania(kw):',
 			'filters'    =>   array('StringTrim'),
 		));
 	
 		$this->addElement('text', 'Waga', array(
-			'value'      =>  $waga,
+//			'value'      =>  $waga,
 			'label'      =>	'Podaj wage monitora(kg):',
 			'filters'    =>   array('StringTrim'),
 		));

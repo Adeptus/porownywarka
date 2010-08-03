@@ -25,6 +25,19 @@ class SearchesController extends Zend_Controller_Action {
 		}
 	}
 
+	public function searchbyparametersAction() {
+		$form = new Application_Form_SearchByParameters();
+		$this->view->form = $form;
+		if ($this->getRequest()->isPost()) {
+        $formData = $this->getRequest()->getPost();
+  			if ($form->isValid($formData)) {
+    			$monitory = $this->show_all();
+            } else {
+               $form->populate($formData);
+            }
+        }
+	}
+
 
 	private function show_one_by_id($monitor_id) {
         $monitor = new Application_Model_DbTable_Monitors();

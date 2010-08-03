@@ -6,8 +6,9 @@ class MonitorsController extends Zend_Controller_Action {
 
 	}
 	public function addAction() {
-		$form    = new Application_Form_MonitorAdd();
+		$form    = Application_Form_Factory::create();
 		$this->view->form = $form;
+
 		if ($this->getRequest()->isPost()) {
         $formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
