@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script
+   src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA4dbYHMRG6Q86bYlYW9Pe0RSTb3qZwAPoZbEXkO9Yh29Uk1VtFRR7NZYZ67g0T76QLYhAdZ8aHnwVsg"type
+   ="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function load() {
+if (GBrowserIsCompatible()) {
+var map = new GMap2(document.getElementById("map"));
+map.addControl(new GSmallMapControl());
+map.setCenter(new GLatLng(52.079506, 19.401855), 6);
+
+var marker = new GMarker(new GLatLng (<?php echo $this->dane[0];?>));
+var text = "<b><?php echo $this->dane[1];?></b><br />ul. <?php echo $this->dane[2];?><br /><?php echo $this->dane[3];?> <?php echo $this->dane[4];?>";
+GEvent.addListener(marker, "click", function() {
+    marker.openInfoWindowHtml(text);
+});
+map.addOverlay(marker);
+}
+}
+//]]>
+</script>
+</head>
+<body onload="load()" onunload="GUnload()" style="margin:0;padding:0">
+<div class="container">
+	<div class="span-24">
+    	<div class="prepend-6 span-8">
+	    <a href="<?php echo $this->url(
+	    	array(
+	    		'controller'=>'seller',
+	    		'action'    =>'index'
+	    	),
+	    	'default',
+	    	true) ?>">Strona sprzedawcy</a>
+    	</div>
+	    <div class="span-8 last">
+	    <a href="<?php echo $this->url(
+	    	array(
+	    		'controller'=>'searches',
+	    		'action'    =>'index'
+	    	),
+	    	'default',
+	    	true) ?>">Strona kupującego</a>
+	    </div>
+    </div>
+	<div class="span-6 prepend-top append-bottom">
+        <?php $this->form->setAction($this->url());
+		echo $this->form;?>
+    </div>
+    <div class="span18">
+    	<div class="prepend-1 prepend-top span-17 last">
+            <div id="map" style="width: 580px; height: 440px"></div>
+        </div>
+    	<div class="prepend-1 prepend-top span-6">
+           <?php if ($this->dane) { $this->formDelivery->setAction($this->url());
+            echo $this->formDelivery; }?>
+    	</div>
+    	<div class="prepend-1 prepend-top span-10 last">
+           <?php if ($this->deliveryOptions) { ?>
+            <table>
+                 <tr>
+				    <th>Numer</th>
+				    <th>Opis(<b>główny pogrubiony</b>)</th>
+				    <th>Koszt</th>
+				    <th>Opcje</th>
+			    </tr>                
+                <?php foreach ($this->deliveryOptions as $delivery) : ?>
+       			<tr>
+	    			<td><? if ($this->defaultdelivery == $delivery->numer) echo '<b>'; ?><?php echo $delivery->numer;?></b></td>
+	    			<td><? if ($this->defaultdelivery == $delivery->numer) echo '<b>'; ?><?php echo $delivery->dostawa;?></b></td>
+	    			<td><? if ($this->defaultdelivery == $delivery->numer) echo '<b>'; ?><?php echo $delivery->koszt;?></b></td>
+	    			<td><a href="<?php echo $this->url(array('controller'=>'seller', 'action'=>'deleteDelivery', 'delivery_id'=>$delivery->id, 'id2'=>$this->dane[7]));?>">usuń</a></td>
+                </tr>
+           <?php endforeach; ?>
+            </table>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+</body>

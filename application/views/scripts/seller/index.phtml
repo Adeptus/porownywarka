@@ -1,0 +1,89 @@
+<div class="container">
+	<div class="prepend-6 span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona główna</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona kupującego</a>
+	</div>
+<?php if ($this->companies) { ?>
+	<div class="prepend-3 span-13 prepend-top">
+		<table>
+			<tr>
+				 <th>Firma</th>
+			</tr>
+			<?php foreach($this->companies as $company) : ?>
+			<tr>
+				<td>
+                    <a href="<?php echo $this->url(array('controller'=>'seller', 'action'=>'index',
+                     'id'=>$company->id));?>"><?php echo $this->escape($company->nazwa);?></a>
+                </td>
+			</tr>
+    		<?php endforeach; ?>
+		</table>
+    </div>
+	<div class="prepend-3 span-5 prepend-top last">
+    	<a href="<?php echo $this->url(
+    		array(
+    			'controller'=>'seller',
+    			'action'    =>'shopinfo'
+            ),
+    		'default',
+    		true) ?>">Nowa firma</a>
+	</div>
+
+<? } ?>
+<?php if ($this->user) { ?>
+	<div class="prepend-10 prepend-top span-8 last">
+    	<a href="<?php echo $this->url(
+    		array(
+    			'controller'=>'seller',
+    			'action'    =>'shopinfo',
+                'id'        =>$this->user
+            ),
+    		'default',
+    		true) ?>">Informacja o sklepie</a>
+	</div>
+	<div class="prepend-10 span-8 last">
+    	<a href="<?php echo $this->url(
+    		array(
+    			'controller'=>'seller',
+    			'action'    =>'addoffer',
+                'id'        =>$this->user
+            ),
+    		'default',
+    		true) ?>">Dodaj nowe oferty</a>
+	</div>
+	<div class="prepend-10 span-8 last">
+    	<a href="<?php echo $this->url(
+    		array(
+    			'controller'=>'seller',
+    			'action'    =>'offers',
+                'id'        =>$this->user
+            ),
+    		'default',
+    		true) ?>">Zarządzaj swoimi ofertami</a>
+	</div>
+	<div class="prepend-10 span-8 last">
+    	<a href="<?php echo $this->url(
+    		array(
+    			'controller'=>'statistics',
+    			'action'    =>'index',
+                'id'        =>$this->user
+            ),
+    		'default',
+    		true) ?>">Statystyki</a>
+	</div>
+<? } ?>
+</div>

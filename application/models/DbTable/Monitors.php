@@ -9,7 +9,7 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
 		if (!$row) {
 			return null;
 		}
-		return $row->toArray();
+		return $row;
 	}
 
 	public function getMonitorByName($nazwa) {
@@ -19,8 +19,21 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
 		if (!$row) {
 			return null;
 		}
-		return $row->toArray();
+		return $row;
 	}
+
+	public function getAllProducers() {
+        $selectA = $this->select()
+             ->from(array('m' => 'monitory'), 'marka');
+
+        $select = $this->select()->union(array($selectA, $selectA));
+
+        $rows = $this->fetchAll($select);
+		if (!$rows) {
+			return null;
+		}
+		return $rows->toarray();
+    }
 
 	public function addMonitor($id = null, $marka, $nazwa, $cale, $jasnosc, $reakcja, $kontrast, $rozdzielczosc, $katy = null, $kolor = null, $pobor = null, $czuwanie = null, $waga = null) {
         if($this->getMonitorByName($nazwa) === null) {        
@@ -73,41 +86,36 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
 
     //Wyszukiwanie id po parametrach:
 
-    public function getIdsByParameters($parameter, $value_parameter, $option = null, $value_parameter2 = null) {
-        if ($option === 'min') {
+    public function getIdsByParameters($parameter, $valueMin = null, $valueMax = null) {
+        if (($valueMin != null) && ($valueMax == null)) {
             $select = $this->select()
-                ->from ('monitory', 'id')
-                ->where($parameter.'>= ?', $value_parameter)
+                ->from ('monitory')
+                ->where($parameter.'>= ?', $valueMin)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
             return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
-        } else if($option === "max") {
+        } else if (($valueMin == null) && ($valueMax != null)) {
             $select = $this->select()
-                ->from ('monitory', 'id')
-                ->where($parameter.'<= ?', $value_parameter)
+                ->from ('monitory')
+                ->where($parameter.'<= ?', $valueMax)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
             return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
-        } else if ($option === "between") { 
+        } else if (($valueMin != null) && ($valueMax != null)) { 
             $select = $this->select()
-                ->from ('monitory', 'id')
-                ->where($parameter.'>= ?', $value_parameter)
-                ->where($parameter.'<= ?', $value_parameter2)
+                ->from ('monitory')
+                ->where($parameter.'>= ?', $valueMin)
+                ->where($parameter.'<= ?', $valueMax)
                 ->order('id');
             $monitorsIdsTable = $this->fetchall($select);
             return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
         } else {
-            $select = $this->select()
-                ->from ('monitory', 'id')
-                ->where($parameter.'= ?', $value_parameter)
-                ->order('id');
-            $monitorsIdsTable = $this->fetchall($select);
-            return $this->changeMonitorsIdsTableToTableWithId($monitorsIdsTable);
+            return array();
         }
     }
     
     private function changeMonitorsIdsTableToTableWithId($monitorsIdsTable) {
-        if (!empty($monitorsIdsTable[0])) {
+        if (($monitorsIdsTable[0] != null)) {
             foreach ($monitorsIdsTable as $monitorId) {
                 $tabelaWithId[] = $monitorId['id'];
             }	

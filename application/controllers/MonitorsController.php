@@ -13,8 +13,7 @@ class MonitorsController extends Zend_Controller_Action {
         $formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
 				$monitor = new Application_Model_DbTable_Monitors();
-                $kontrast = $form->getValue('Kontrast').':1';
-   			    $addMonitor = $monitor->addMonitor(null, $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $kontrast, $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
+   			    $addMonitor = $monitor->addMonitor(null, $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $form->getValue('Kontrast'), $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
                 if ($addMonitor  === true) { 
                     $monitor_id = $monitor->getMonitorByName($form->getValue('nazwa'));  			    
                     $this->_redirect('/searches/index/monitor_id/'.$monitor_id['id']);
@@ -44,7 +43,8 @@ class MonitorsController extends Zend_Controller_Action {
 					if (isset($tabela['Rozmiar'])) {					
 						$monitor = new Application_Model_DbTable_Monitors();
    					    $monitor->addMonitor(null, 'Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)'],$tabela['Kontrast'], $tabela['Rozdzielczość'], $tabela['Kąty widoczności (poziomo/pionowo)'], $tabela['Kolor obrazu'], $tabela['Włączony'], $tabela['Tryb czuwania (DPMS)'], $tabela['Netto (kg)']);
-   					    $this->_redirect('/searches/index/');					
+                        $monitor_id = $monitor->getMonitorByName($tabela['nazwa']);  			    
+                        $this->_redirect('/searches/index/monitor_id/'.$monitor_id['id']);				
 					} else $this->_redirect('/monitors/add/');
 				} else $this->_redirect('/monitors/add/');
 			}
@@ -59,15 +59,15 @@ class MonitorsController extends Zend_Controller_Action {
 		if ($this->getRequest()->isPost()) {
         $formData = $this->getRequest()->getPost();
   			if ($form->isValid($formData)) {
-                $kontrast = $form->getValue('Kontrast').':1';
-   			    $monitor->updateMonitor($form->getValue('id'), $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $kontrast, $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
+   			    $monitor->updateMonitor($form->getValue('id'), $form->getValue('marka'), $form->getValue('nazwa'), $form->getValue('Cale'), $form->getValue('Jasnosc'), $form->getValue('Reakcja'), $form->getValue('Kontrast'), $form->getValue('Rozdzielczosc'), $form->getValue('Katy'), $form->getValue('Kolor'), $form->getValue('Pobor'), $form->getValue('Czuwanie'), $form->getValue('Waga'));
    			    $this->_redirect('/searches/index/monitor_id/'.$form->getValue('id'));
    			} else {
     	 	   $form->populate($formData);
 			} 
 		} else {
   	  		if ($this->_getParam('id') > 0) {
-  	       		$form->populate($monitor->getMonitorById($this->_getParam('id')));
+                $monitorTable = $monitor->getMonitorById($this->_getParam('id'));
+  	       		$form->populate($monitorTable->toArray());
 			}
   		}
 	}
@@ -87,7 +87,8 @@ class MonitorsController extends Zend_Controller_Action {
 			}   
 		} else {
   	  		if ($this->_getParam('id') > 0) {
-  	       		$form->populate($monitor->getMonitorById($this->_getParam('id')));
+                $monitorTable = $monitor->getMonitorById($this->_getParam('id'));
+  	       		$form->populate($monitorTable->toArray());
 			}
   		}
 	}

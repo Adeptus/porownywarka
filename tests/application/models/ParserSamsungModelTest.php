@@ -17,6 +17,6 @@ class ParserSamsungModelTest extends ControllerTestCase
     public function test_functionRemoveAllWrongValueFromTable() {
         $tableToCheck = array('Kontrast' => 'sraka na bosaka 10 0 0:1 (032 lo l)', 'Rozdzielczość' => '1 1 1 1      x 2522');
         $correctTable = $this->parser->removeAllWrongValueFromTable($tableToCheck);
-        $this->assertEquals('1000:1', $correctTable['Kontrast']);
+        $this->assertEquals('1000', $correctTable['Kontrast']);
     }   
 }

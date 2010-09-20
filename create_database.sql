@@ -1,7 +1,8 @@
 CREATE DATABASE db1;
 CONNECT db1;
+
 CREATE TABLE `monitory` (
-	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`marka` VARCHAR(50) NOT NULL,
 	`nazwa` VARCHAR(50) NOT NULL,
 	`Cale` INT(20) UNSIGNED NOT NULL,
@@ -14,14 +15,22 @@ CREATE TABLE `monitory` (
 	`Pobor` VARCHAR(30),
 	`Czuwanie` VARCHAR(30),
 	`Waga` VARCHAR(30),	
+	`category_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
+	KEY `category_id` (`category_id`)
 	UNIQUE INDEX `nazwa` (`nazwa`)
-);
+)ENGINE=INNODB;
+
+
+
+
+
+
 
 CREATE DATABASE dbtest;
 CONNECT dbtest;
 CREATE TABLE `monitory` (
-	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`marka` VARCHAR(50) NOT NULL,
 	`nazwa` VARCHAR(50) NOT NULL,
 	`Cale` INT(20) UNSIGNED NOT NULL,
@@ -34,6 +43,8 @@ CREATE TABLE `monitory` (
 	`Pobor` VARCHAR(30),
 	`Czuwanie` VARCHAR(30),
 	`Waga` VARCHAR(30),	
+	`category_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
+	KEY `category_id` (`category_id`)
 	UNIQUE INDEX `nazwa` (`nazwa`)
-);
+)ENGINE=INNODB;

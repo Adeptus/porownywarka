@@ -2,6 +2,13 @@
 
 class SearchesController extends Zend_Controller_Action {
 
+        protected $model;
+        
+        public function preDispatch() {
+            $this->model = new Application_Model_DbTable_Monitors();
+        }
+
+
 	public function indexAction() {
   		if (($this->_getParam('monitor_id') > 0) && ($this->_getParam('monitor2_id') > 0)) {
 			$monitor   = $this->show_one_by_id($this->_getParam('monitor_id'));
@@ -28,38 +35,49 @@ class SearchesController extends Zend_Controller_Action {
 	public function searchbyparametersAction() {
 		$form = new Application_Form_SearchByParameters();
 		$this->view->form = $form;
-		if ($this->getRequest()->isPost()) {
         $formData = $this->getRequest()->getPost();
-  			if ($form->isValid($formData)) {
-    			$monitory = $this->show_all();
+        if ($this->requestIsAPostAndHasValidParams($form)) {
+            $TableCale          = $this->checkFormValueAndGetIdsByParameters('Cale',    $form->getValue('CaleOd'),    $form->getValue('CaleDo'));
+            $TableJasnosc       = $this->checkFormValueAndGetIdsByParameters('Jasnosc', $form->getValue('JasnoscOd'), $form->getValue('JasnoscDo'));
+            $TableReakcja       = $this->checkFormValueAndGetIdsByParameters('Reakcja', $form->getValue('ReakcjaOd'), $form->getValue('ReakcjaDo'));
+            $TableKontrast      = $this->checkFormValueAndGetIdsByParameters('Kontrast', $form->getValue('KontrastOd'), $form->getValue('KontrastDo'));
+            $TableRozdzielczosc = $this->checkFormValueAndGetIdsByParameters('Rozdzielczosc', $form->getValue('RozdzielczoscOd'), $form->getValue('RozdzielczoscDo'));
+            if (($TableCale != null) and ($TableJasnosc != null) and ($TableKontrast != null) and ($TableReakcja != null) and ($TableRozdzielczosc != null)) {       
+        		$MonitorsIds = array_intersect($TableCale, $TableJasnosc, $TableKontrast, $TableReakcja, $TableRozdzielczosc);
+                foreach ($MonitorsIds as $MonitorId) {
+                    $monitory[] = $this->model->getMonitorById($MonitorId);
+                }
+                $this->view->monitory = $monitory;         
             } else {
-               $form->populate($formData);
+                
             }
+        } else {
+            $form->populate($formData);
+        }
+        if ($this->_getParam('monitor_id') > 0) {
+			$monitor   = $this->show_one_by_id($this->_getParam('monitor_id'));
+            $form->populate($formData);
         }
 	}
 
 
 	private function show_one_by_id($monitor_id) {
-        $monitor = new Application_Model_DbTable_Monitors();
-		$this->view->monitor = $monitor->getMonitorById($monitor_id);
-		$this->view->price_monitor = $this->find_price_monitor($monitor->getMonitorById($monitor_id));
-	}
-
-	private function show_second_by_id($monitor_id) {
-		$monitor2 = new Application_Model_DbTable_Monitors();
-		$this->view->monitor2 = $monitor2->getMonitorById($monitor_id);
-		$this->view->price_monitor2 = $this->find_price_monitor($monitor2->getMonitorById($monitor_id));
+   		$this->view->monitor = $this->model->getMonitorById($monitor_id);
+    	$this->view->price_monitor = $this->find_price_monitor($this->model->getMonitorById($monitor_id));
     }
 
-	private function show_all() {
-		$monitory = new Application_Model_DbTable_Monitors();
-		$this->view->monitory = $monitory->fetchAll();
+	private function show_second_by_id($monitor_id) {
+		$this->view->monitor2 = $this->model->getMonitorById($monitor_id);
+		$this->view->price_monitor2 = $this->find_price_monitor($this->model->getMonitorById($monitor_id));
+    }
+
+	private function show_all($order = null) {
+		$this->view->monitory = $this->model->fetchAll($order);
 	}
 
 	private function show_one_by_name($name) {
-		$monitor = new Application_Model_DbTable_Monitors();
-		$this->view->monitor = $monitor->getMonitorByName($name);
-		$this->view->price_monitor = $this->find_price_monitor($monitor->getMonitorByName($name));
+		$this->view->monitor = $this->model->getMonitorByName($name);
+		$this->view->price_monitor = $this->find_price_monitor($this->model->getMonitorByName($name));
 	}
 
 	private function find_price_monitor($monitor) {
@@ -71,6 +89,14 @@ class SearchesController extends Zend_Controller_Action {
     private function requestIsAPostAndHasValidParams($form) {
         if (($this->getRequest()->isPost()) && ($form->isValid($this->getRequest()->getPost()))) {
            return true;
+        }
+    }
+
+    private function checkFormValueAndGetIdsByParameters($parameter, $ValueMin, $ValueMax) {
+        if (($ValueMin == null) && ($ValueMax == null)) {
+            return $this->model->getIdsByParameters($parameter, 1);
+        } else {
+            return $this->model->getIdsByParameters($parameter, $ValueMin, $ValueMax);
         }
     }
 }

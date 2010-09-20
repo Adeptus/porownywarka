@@ -2,6 +2,12 @@
 
 class SearchesControllerTest extends ControllerTestCase
 {
+
+    public function setUp() {
+        parent::setUp();
+		$this->_db = Zend_Registry::get('test');
+    }
+
     public function testIndexAction()
     {
         $this->dispatch('/index');
@@ -21,8 +27,15 @@ class SearchesControllerTest extends ControllerTestCase
           'CaleOd'    => '22',
           'JasnoscDo' => '500',  
         ));
+        
+        $this->model = new Application_Model_DbTable_Monitors();
+        $this->model->setupDatabaseTest();
+
         $this->dispatch('/searches/searchByParameters');
+        
         $this->assertXpath("//form//input[@name='CaleOd'][@value='22']");
+        $this->assertQuery('a[href="/monitors/edit/id/79"]');
+        $this->assertNotQuery('a[href="/monitors/edit/id/14"]');
     }
 
     public function testSearchByParametersActionWithInValidForm() {
@@ -33,6 +46,11 @@ class SearchesControllerTest extends ControllerTestCase
         ));
         $this->dispatch('/searches/searchByParameters');
         $this->assertQuery('ul[class="errors"]');
+    }
+
+    public function testSearchesPageWithMonitorIdInPath() {
+        $this->dispatch('/searches/searchByParameters/monitor_id/79');
+        $this->assertXpath("//table//tr//div[class='span-6']");
     }
 
     private function _validateForm($returnValue = true) {

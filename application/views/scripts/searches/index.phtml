@@ -1,14 +1,33 @@
 <div class="container">
-	<div class="span-8">
+	<div class="prepend-6 span-9">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'monitors',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona Edyscji</a>
+	</div>
+	<div class="span-9 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+	       	        'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona glowna</a>
+	</div>
+
+	<div class="prepend-3 span-7 prepend-top">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'searches',
 	       	        'action'    =>'search'
 		),
 		'default',
-		true) ?>">Znajdz Przedmiot</a>
+		true) ?>">Znajdz konkretny przedmiot</a>
 	</div>
-	<div class="span-8">
+	<div class="span-7 prepend-top">
 	<a href="<?php echo $this->url(
 		array(
 			'controller'=>'monitors',
@@ -17,14 +36,14 @@
 		'default',
 		true) ?>">Dodaj nowy przedmiot</a>
 	</div>
-	<div class="span-8 last">
+	<div class="span-7 prepend-top last">
 	<a href="<?php echo $this->url(
 		array(
-			'controller'=>'index',
-	       	        'action'    =>'index'
+			'controller'=>'searches',
+	       	        'action'    =>'searchByParameters'
 		),
 		'default',
-		true) ?>">Strona glowna</a>
+		true) ?>">Wyszukaj przedmioty po parametrach</a>
 	</div>
 
 <? if ($this->monitor) {?>
@@ -56,7 +75,7 @@
 				<div class="span-6 last"><td><?php echo $this->monitor2[Reakcja];?></td></div>
 			</tr>
 			<tr>
-				<div class="span-6"><th>Kontrast:</th></div>
+				<div class="span-6"><th>Kontrast(x:1):</th></div>
 				<div class="span-6"><td><?php echo $this->monitor[Kontrast];?></td></div>
 				<div class="span-6 last"><td><?php echo $this->monitor2[Kontrast];?></td></div>
 			</tr>
@@ -119,7 +138,7 @@
 			<?php foreach($this->monitory as $monitor) : ?>
 			<tr>
 				<td><?php echo $this->escape($monitor->marka);?></td>
-				<td><?php echo $this->escape($monitor->nazwa);?></td>
+				<td><?php echo $monitor->nazwa;?></td>
 				<td>
 				<a href="<?php echo $this->url(array('controller'=>'searches',
 					      'action'=>'index', 'monitor_id'=>$monitor->id));?>">Wyswietl</a>	

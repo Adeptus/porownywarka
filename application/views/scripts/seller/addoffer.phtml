@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="prepend-6 span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona główna</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona kupującego</a>
+	</div>
+<?php if ($this->categories) { ?>
+    <div class="prepend-1 span-9 prepend-top">
+        <form id="selectCategory" method="POST">
+	        <label for="category">Wybierz kategorię oferowanego przedmiotu:</label><br>
+	        <select id="category" name="category" >
+		        <?php foreach ($this->categories as $category): ?>
+		        <option value="<?= $category->name; ?>"
+                <?= ($category->name == $this->name) ? 'SELECTED="1"' : ''  ?> >
+                <?= $category->name; ?></option>
+		        <?php endforeach;?>
+	        </select>
+	        <input type="submit" name="btsubmit" id="btsubmit" value="wybierz" />  	
+        </form>
+    </div>
+<? } ?>
+<?php if ($this->producers) { ?>
+    <div class="prepend-1 span-9 prepend-top">
+        <form id="findProduct" method="POST">
+
+	        <label ">Wybierz producenta oferowanego przedmiotu:</label><br>
+	        <select id="producer" name="producer" >
+		        <?php foreach ($this->producers as $producer): ?>
+		        <option value="<?= $producer['marka']; ?>"><?= $producer['marka'] ?></option>
+		        <?php endforeach;?>
+	        </select>
+
+        	<br><label">nazwa:</label>
+        	<input type="text" name="name" id="name" /> 
+
+	        <input type="submit" name="submit" id="submit" value="szukaj" />  	
+        </form>
+    </div>
+<? } ?>
+

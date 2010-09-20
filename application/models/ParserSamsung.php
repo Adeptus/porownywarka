@@ -63,11 +63,15 @@ class Application_Model_ParserSamsung {
         
         $rozdzielczosc = str_replace(' ', '', $tabela['Rozdzielczość']);
         $tabela['Rozdzielczość'] = $rozdzielczosc;
-
-        $ToReplaceInKontrast = array('/[a-zA-Z]/', '/\\(.*\\)/');
-        $kontrast = preg_replace($ToReplaceInKontrast, '', $tabela['Kontrast']);
-        $tabela['Kontrast'] = str_replace(' ', '', $kontrast);
-
+        
+        if (($tabela['Kontrast'] == "MEGA DCR (1 000:1)") or ($tabela['Kontrast'] == "MEGA DCR (typ. 1 000:1)")) {
+            $tabela['Kontrast'] = "1000";
+        } else {
+            $ToReplaceInKontrast = array('/[a-zA-Z]/', '/\\(.*\\)/');
+            $kontrast = preg_replace($ToReplaceInKontrast, '', $tabela['Kontrast']);
+            $ToChangeToNullInKontrast = array(' ', ':1');
+            $tabela['Kontrast'] = str_replace($ToChangeToNullInKontrast, '', $kontrast);
+        }
         return $tabela;
     
     }
