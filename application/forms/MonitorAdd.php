@@ -24,7 +24,7 @@ class Application_Form_MonitorAdd extends Zend_Form {
 			'required'   =>   true,
             'validators' =>  array(array('regex', true, array('/^[0-9]{2}(\,|\.)?[0-9]?$/'))),
             'ErrorMessages' => array("Wartos moze skladac sie z dwuch cyfr(oraz ewentualnej liczby po przecinku)"),
-//            'style'    => 'width: 4em; height: 1,5em;',
+            'style'    => 'width: 4em; height: 1,5em;',
             'maxlength'   => 4,
 		));
 

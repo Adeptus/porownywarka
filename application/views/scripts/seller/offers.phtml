@@ -18,22 +18,37 @@
 		true) ?>">Strona kupującego</a>
 	</div>
 <?php if ($this->categories) { ?>
-    <form id="frm" method="POST">
-	    <label for="name">name:</label>
-	    <input type="text" name="name" id="name" value="<?= $this->name; ?>" /> 
-
-	    <label for="email">email:</label>
-	    <input type="text" name="email" id="email" value="<?= $this->email; ?>" /> 
-
-	    <label for="contactType">contact type:</label>
-	    <select id="contactType" name="contactType" >
-		    <option value=""> -- </option>		
-		    <?php foreach ($this->contactTypes as $type): ?>
-		    <option value="<?= $type->id; ?>" 
-			    <?= ($type->id == $this->contacttype_id) ? 'SELECTED="1"' : ''  ?> >
-		    <?= $type->name; ?></option>
-		    <?php endforeach;?>
-	    </select>
-	    <input type="submit" name="btsubmit" id="btsubmit" value="submit" />  	
-    </form>
+    <div class="prepend-1 span-9 prepend-top last">
+        <form id="selectCategory" method="POST">
+	        <label for="category">Wybierz kategorię oferowanych przedmiotów:</label><br>
+	        <select id="category" name="category">
+                <option value="<?= $this->actualCategory; ?>"><?= $this->actualCategory; ?></option>
+		        <?php foreach ($this->categories as $category): ?>
+                    <?php if ($category['name'] != $this->actualCategory) { ?>
+        		        <option value="<?= $category['name']; ?>"><?= $category['name'] ?></option>
+                    <? } ?>
+		        <?php endforeach;?>
+	        </select>
+	        <input type="submit" value="wybierz" />  	
+        </form>
+    </div>
 <? } ?>
+<div class="prepend-top span-24 last">
+<? if ($this->allOffers) { ?>
+    <table id='tableOffers'>
+        <tr>
+            <th>Kategoria</th>       
+		    <th>Producent</th>
+		    <th>Nazwa</th>
+		    <th>Cena</th>
+		    <th>Promocja</th>
+		    <th>Opis</th>
+		    <th>Magazyn</th>
+		    <th>Cena hurtowa</th>
+		    <th>Raty</th>
+		    <th>Opcje</th>
+	    </tr> 
+            <?= $this->partialLoop("partials/offer.phtml", $this->allOffers); ?>
+    </table>
+<? } ?>
+</div>

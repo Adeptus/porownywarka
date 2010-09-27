@@ -1,0 +1,210 @@
+<div class="container">
+	<div class="prepend-6 span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona główna</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona kupującego</a>
+	</div>
+    <?php if ($this->errorMessage) { ?>
+        <div class="prepend-5 span-14 append-5 prepend-top">
+            <h3><?= $this->errorMessage ?></h3>
+        </div>
+    <? } ?>
+<?php if ($this->categories) { ?>
+    <div class="prepend-1 span-9 append-1 prepend-top last">
+        <form id="offersparameters" method="POST">
+
+            <label>Podaj nazwe uprzednio wgranego arkuszu(nie podawaj rozszerzenia)</label>
+        	<input type="text"   name="fileName" /> 
+
+            <fieldset id="requiredParameters"><legend>Wymagane pola arkusza:</legend>
+
+	            <label for="categoryColumn" class="required">Wybierz kategorię lub kolumne oferowanych przedmiotów:</label>
+	            <select id="categoryColumn" name="categoryColumn">
+                    <option value="0"> --- </option>
+		            <?php foreach ($this->categories as $category): ?>
+                        <?php if ($category->name != $this->actualCategory) { ?>
+		                    <option value="<?= $category->name; ?>"
+                            <?= ($category->name == $this->name) ? 'SELECTED="1"' : ''  ?> >
+                            <?= $category->name; ?></option>
+                        <? } ?>
+		            <?php endforeach;?>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="producersColumn" class="required">Wybierz kolumne z markami produktów: </label>
+	            <select id="producersColumn" name="producersColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="nameColumn" class="required">Wybierz kolumne z nazwami produktów: </label>
+	            <select id="nameColumn" name="nameColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="priceColumn" class="required">Wybierz kolumne z cenami produktów: </label>
+	            <select id="priceColumn" name="priceColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+            </fieldset>
+            <fieldset id="notRequiredParameters"><legend>Opcjonalne pola arkusza:</legend>
+
+	            <label for="promotionColumn" class="required">Wybierz kolumne z offerowanymi promocjami: </label>
+	            <select id="promotionColumn" name="promotionColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="descriptionColumn" class="required">Wybierz kolumne z dodatkowymi opisami: </label>
+	            <select id="descriptionColumn" name="descriptionColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="stateColumn" class="required">Wybierz kolumne z iloscia w magazynie: </label>
+	            <select id="stateColumn" name="stateColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+
+	            <label for="pricewholesaleColumn" class="required">Wybierz kolumne z cenami hurtowymi: </label>
+	            <select id="pricewholesaleColumn" name="pricewholesaleColumn">
+                    <option value="0"> --- </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <option value="5">E</option>
+                    <option value="6">F</option>
+                    <option value="7">G</option>
+                    <option value="8">H</option>
+                    <option value="9">I</option>
+                    <option value="10">J</option>
+                    <option value="11">K</option>
+                    <option value="12">L</option>
+                    <option value="13">M</option>
+                    <option value="14">N</option>
+                    <option value="15">O</option>
+	            </select><br>
+            </fieldset>
+	            <input type="submit" value="dodaj przedmioty wedlug podanego schematu" />  	
+
+       </form>
+    </div>
+<? } ?>
+
+</div>

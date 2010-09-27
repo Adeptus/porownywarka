@@ -17,37 +17,115 @@
 		'default',
 		true) ?>">Strona kupującego</a>
 	</div>
+<?php if ($this->errorMessage) { ?>
+    <div class="prepend-5 span-14 append-5 prepend-top">
+        <h3><?= $this->errorMessage ?></h3>
+    </div>
+<? } ?>
+<div class="span-10">
 <?php if ($this->categories) { ?>
-    <div class="prepend-1 span-9 prepend-top">
+    <div class="prepend-1 span-9 prepend-top last">
         <form id="selectCategory" method="POST">
 	        <label for="category">Wybierz kategorię oferowanego przedmiotu:</label><br>
-	        <select id="category" name="category" >
+	        <select id="category" name="category">
+                <option value="<?= $this->actualCategory; ?>"><?= $this->actualCategory; ?></option>
 		        <?php foreach ($this->categories as $category): ?>
-		        <option value="<?= $category->name; ?>"
-                <?= ($category->name == $this->name) ? 'SELECTED="1"' : ''  ?> >
-                <?= $category->name; ?></option>
+                    <?php if ($category->name != $this->actualCategory) { ?>
+		                <option value="<?= $category->name; ?>"
+                        <?= ($category->name == $this->name) ? 'SELECTED="1"' : ''  ?> >
+                        <?= $category->name; ?></option>
+                    <? } ?>
 		        <?php endforeach;?>
 	        </select>
-	        <input type="submit" name="btsubmit" id="btsubmit" value="wybierz" />  	
+	        <input type="submit" value="wybierz" />  	
         </form>
     </div>
 <? } ?>
 <?php if ($this->producers) { ?>
-    <div class="prepend-1 span-9 prepend-top">
+    <div class="prepend-1 span-9 prepend-top last">
         <form id="findProduct" method="POST">
-
 	        <label ">Wybierz producenta oferowanego przedmiotu:</label><br>
 	        <select id="producer" name="producer" >
-		        <?php foreach ($this->producers as $producer): ?>
-		        <option value="<?= $producer['marka']; ?>"><?= $producer['marka'] ?></option>
+                <? if ($this->item) { ?>
+                <option value="<?= $this->item['marka']; ?>"><?= $this->item['marka']; ?></option>
+                <? } ?>
+	            <?php foreach ($this->producers as $producer): ?>
+                    <?php if ($producer['marka'] != $this->item['marka']) { ?>
+        		        <option value="<?= $producer['marka']; ?>"><?= $producer['marka'] ?></option>
+                    <? } ?>
+	            <?php endforeach;?>
+	        </select><br>
+        	<label ">Wybierz nazwę oferowanego przedmiotu:</label><br>
+        	<input type="text"   name="itemName"     value="<?= $this->item['nazwa'] ?>" /> 
+            <input type="hidden" name="category" value="<?= $this->actualCategory ?>"/>
+	        <input type="submit"                 value="szukaj" />  	
+        </form>
+        <a href="<?php echo $this->url(
+		    array(
+			    'controller'=> $this->actualCategory,
+			    'action'    =>'addByParsing'
+		    ),
+		    'default',
+	    	true) ?>">Dodaj przedmiot jak nie istnieje</a>
+    </div>
+<? } ?>
+<? if ($this->item['id']) { ?>
+    <div class="prepend-1 span-9 prepend-top last">
+        <form id="addOffer" method="POST">
+        	<label ">Musisz wprowadzic cene przedmiotu:</label>
+        	<input type="text"   name="itemPrice" value="" required="true"/><br>
+
+        	<label ">Mozesz wprowadzic opis promocji:</label>
+        	<input type="text"   name="promotion" value="" /><br>
+
+        	<label ">Mozesz wybrac inny sposob dostawy:</label>
+	        <select id="delivery" name="delivery" >
+                <option value="<?= $this->defaultDelivery['id']; ?>"><?= $this->defaultDelivery['dostawa']; ?> (cena = <?= $this->defaultDelivery['koszt']; ?> zł)</option>
+		        <?php foreach ($this->deliveryOptions as $delivery): ?>
+                    <?php if ($delivery->id != $this->defaultDelivery['id']) { ?>
+		                <option value="<?= $delivery->id; ?>"
+                        <?= ($delivery->id == $this->id) ? 'SELECTED="1"' : ''  ?> >
+                        <?= $delivery->dostawa; ?> (cena = <?= $delivery->koszt; ?> zł)</option>
+                    <? } ?>
 		        <?php endforeach;?>
-	        </select>
+	        </select><br>
 
-        	<br><label">nazwa:</label>
-        	<input type="text" name="name" id="name" /> 
+        	<label ">Mozesz wprowadzic dodatkowy opis przedmiotu:</label>
+        	<input type="text"   name="description" value="" /><br>
+ 
+           	<label ">Mozesz wprowadzic stan magazynowy(domyslnie 1):</label>
+        	<input type="text"   name="state" value="" /><br>
 
-	        <input type="submit" name="submit" id="submit" value="szukaj" />  	
+        	<label ">Mozesz wprowadzic cena hurtowa:</label>
+        	<input type="text"   name="pricewholesale" value="" /><br>
+
+        	<label ">Mozesz okreslić czy daną ofertę można wziać na raty:</label>
+            <input type="checkbox" name="installment" value="1"><br>
+
+            <input type="hidden" name="itemParameterName"           value="<?= $this->item['nazwa'] ?>"/>
+            <input type="hidden" name="itemParameterProducer"       value="<?= $this->item['marka'] ?>"/>
+            <input type="hidden" name="itemParameterActualCategory" value="<?= $this->actualCategory ?>"/>
+
+
+	        <input type="submit"             value="Dodaj ofertę" />  
         </form>
     </div>
 <? } ?>
+</div>
+<div class="prepend-top prepend-4 span-6 last">
+        <a href="<?php echo $this->url(
+		    array(
+			    'controller'=> seller,
+			    'action'    =>'addOffersByXls',
+                'id'        => $this->user
+		    ),
+		    'default',
+	    	true) ?>">Dodaj przedmioty za pomoca arkusza stylow</a>
+    </div>
+<? if ($this->item['id']) { ?>
+    <?= $this->partial("partials/$this->actualCategory.phtml", $this->item); ?>
+<? } ?>
+</div>
+
+
 

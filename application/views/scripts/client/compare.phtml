@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="prepend-6 span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona główna</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'client',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona kupującego</a>
+	</div>
+<?php if ($this->categories) { ?>
+	<div class="span-6 prepend-top">
+		<table id="tableCategories">
+			<tr>
+				 <th>KATEGORIE</th>
+			</tr>
+			<?php foreach($this->categories as $category) : ?>
+			<tr>
+				<td>
+                    <a href="<?php echo $this->url(array('controller'=>'client', 'action'=>'search', 'category'=>$category->name));?>"><?php echo $category->name;?></a>
+                </td>
+			</tr>
+    		<?php endforeach; ?>
+		</table>
+    </div>
+<? } ?>
+</div>

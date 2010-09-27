@@ -3,4 +3,38 @@
 	text-align: center;
 	background: #CDCDCD;
 }
+#tableOffers 
+{
+   border: 1px solid #9BC2D9;
+   border-collapse: collapse;
+   background-color: #EFF5FB;
+}
+#tableOffers td, #tableOffers th {
+   border: 1px solid #9BC2D9;
+   padding: 5px;
+}
+#tableCategories 
+{
+   border: 1px solid #9BC2D9;
+   border-collapse: collapse;
+   background-color: #EFF5FB;
+}
+#tableCategories th {
+   border: 1px solid #9BC2D9;
+   padding: 5px;
+   text-align:center;
+}
 
+#tableCategories td {
+   border: 1px solid #9BC2D9;
+   padding: 5px;
+}
+#fieldset1 {
+height:154px;
+width:80px;
+}
+.chmurka {
+ position:absolute;display:none;left:25px;top:25px;
+ border:1px dashed #0072bc;background-color:#448cca;
+ padding:5px;font:normal normal 10px Arial,Verdana;
+}

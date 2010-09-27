@@ -1,0 +1,18 @@
+<tr>
+    <td><?php echo $this->category_name;?></td>        
+    <td><?php echo $this->item_producer;?></td>
+    <td><?php echo $this->item_name;?></td>
+    <td><?php echo $this->price;?></td>
+    <td><?php echo $this->promotion;?></td>
+    <td><?php echo $this->description;?></td>
+    <td><?php echo $this->state;?></td>
+    <td><?php echo $this->pricewholesale;?></td>
+    <td><?php if ($this->installment == 1) {
+         echo "tak"; 
+         } else echo "nie"?></td>
+    <td><a href="<?php echo $this->url(array('controller'=>'seller',
+                                             'action'=>'deleteOffer',
+                                             'offer_id'=>$this->id,
+                                             'id2'=>$this->_getParam['id'],
+                                             'category'=>$this->category_name));?>">usuń</a></td>
+</tr>

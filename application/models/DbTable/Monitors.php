@@ -4,6 +4,18 @@ class Application_Model_DbTable_Monitors extends Application_Model_DatabaseGatew
 {
 	protected $_name    = 'monitory';
 
+    public function getFieldsNames() {
+        return array('Cale', 'Jasnosc', 'Reakcja', 'Kontrast', 'Rozdzielczosc');
+    }
+
+    public function getFieldsDescriptions() {
+        return array('Cale'          => "<b>Przekątna</b><br>Przekątna ekranu podawana w calach",
+                     'Jasnosc'       => "<b>Jasność</b><br>Podawana w kandelach na metr kwadratowy (cd/m2) określa maksymalną światłość którą emituje<br> ekran wyświetlający czystą biel",
+                     'Reakcja'       => "<b>Czas reakcji</b><br>Średni czas zapalenia i zgaszenia piksela. Wpływa na jakość wyświetlania dynamicznych scen.<br> W monitorach o większym czasie reakcji może pojawiać się tzw. smużenie.",
+                     'Kontrast'      => "<b>Kontrast</b><br>Stosunek jasności maksymalnej do minimalnej. Bardzo ważny parametr monitora.<br> Im większy kontrast tym lepsze odzworowanie czerni i dobre odwzorowanie <br>szczegółów w ciemnych partiach obrazu.",
+                     'Rozdzielczosc' => "<b>Rozdzielczość</b><br>Ilość pikseli na ekranie, podawana w formacie szerokość na wysokość.<br> Większa rozdzielczość pozwala na wyświetlenie bardziej szczegółowych obrazów.");
+    }
+
 	public function getMonitorById($id) {
         $row = $this->fetchRow('id='.$id);
 		if (!$row) {

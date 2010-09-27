@@ -1,0 +1,41 @@
+<div class="span-17">
+    <fieldset>
+    <div class="span-1">
+        <input type="checkbox" value="<?= $this->nazwa ?>" name="<?= $this->nazwa ?>">  
+    </div>
+	<div class="span-5"><h4>Producent: <strong><? echo $this->marka; ?></strong></h4><br>
+                        <h4>Nazwa: <strong><? echo $this->nazwa; ?></strong></h4>
+    </div>
+    <div class="span-6">
+	    <table id="tableOffers">
+	    	<tr>
+	    		<th>Parametr:</th>
+				<th>Wartość:</th>
+			</tr>
+	    	<tr>
+	    		<td>Przekątna(Cale):</td>
+				<td><?php echo $this->Cale;?></td>
+			</tr>
+	    	<tr>
+	    		<td>Jasność:</td>
+				<td><?php echo $this->Jasnosc;?></td>
+			</tr>
+	    	<tr>
+	    		<td>Czas reakcja(ms):</td>
+				<td><?php echo $this->Reakcja;?></td>
+			</tr>
+	    	<tr>
+	    		<td>Kontrast(x:1):</td>
+				<td><?php echo $this->Kontrast;?></td>
+			</tr>
+	    	<tr>
+	    		<td>Rozdzielczość:</td>
+				<td><?php echo $this->Rozdzielczosc;?></td>
+			</tr>
+		</table>
+    </div>    
+    <div class="span-4 last">
+            <img src="http://www.samsung.com/pl/system/consumer/product/2009/07/29/hxsu016ba/02_medium.jpg" width="100" hight="100" align="right">
+    </div>
+    </fieldset>
+</div>

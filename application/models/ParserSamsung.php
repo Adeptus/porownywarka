@@ -5,9 +5,9 @@ class Application_Model_ParserSamsung {
 	public function findMonitor($szukana) {	
 		
 		$curl1 = curl_init();
-		curl_setopt($curl1, CURLOPT_URL, "http://www.samsung.com/pl/function/espsearch/searchResult.do?keywords=$szukana&amp;input_keyword=$szukana");
-		curl_setopt($curl1, CURLOPT_RETURNTRANSFER, 1);
-		$strona1 = curl_exec($curl1);
+    	curl_setopt($curl1, CURLOPT_URL, "http://www.samsung.com/pl/function/espsearch/searchResult.do?keywords=$szukana&amp;input_keyword=$szukana");
+	   	curl_setopt($curl1, CURLOPT_RETURNTRANSFER, 1);
+	   	$strona1 = curl_exec($curl1);
 		curl_close($curl1);
 
     	$dom1 = new domDocument;

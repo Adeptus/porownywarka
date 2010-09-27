@@ -55,7 +55,7 @@ ol {list-style-type:decimal;}
 dl {margin:0 0 1.5em 0;}
 dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
-table {margin-bottom:1.4em;width:100%;}
+table {margin-bottom:1.4em;width:100%}
 th {font-weight:bold;}
 thead th {background:#c3d9ff;}
 th, td, caption {padding:4px 10px 4px 5px;}
@@ -77,9 +77,9 @@ caption {background:#eee;}
 
 /* forms.css */
 label {font-weight:bold;}
-fieldset {padding:1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
+fieldset {padding:1.4em;margin:0 0 1.5em 0;border:1px solid #9BC2D9;}
 legend {font-weight:bold;font-size:1.2em;}
-input[type=text], input[type=password], input.text, input.title, textarea, select {background-color:#fff;border:1px solid #bbb;}
+input[type=text], input[type=password], input.text, input.title, textarea, select {background-color:#EFF5FB;border:1px solid #9BC2D9;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus, select:focus {border-color:#666;}
 input[type=text], input[type=password], input.text, input.title, textarea, select {text-align:center; margin:0.5em 0;}
 input.text, input.title {width:300px;padding:5px;}

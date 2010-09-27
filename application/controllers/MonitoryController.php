@@ -1,6 +1,6 @@
 <?php
 
-class MonitorsController extends Zend_Controller_Action {
+class MonitoryController extends Zend_Controller_Action {
 
 	public function indexAction() {
 
@@ -45,8 +45,8 @@ class MonitorsController extends Zend_Controller_Action {
    					    $monitor->addMonitor(null, 'Samsung', $tabela['nazwa'], $tabela['Rozmiar'], $tabela['Jasność (cd/m2)'], $tabela['Czas reakcji (ms)'],$tabela['Kontrast'], $tabela['Rozdzielczość'], $tabela['Kąty widoczności (poziomo/pionowo)'], $tabela['Kolor obrazu'], $tabela['Włączony'], $tabela['Tryb czuwania (DPMS)'], $tabela['Netto (kg)']);
                         $monitor_id = $monitor->getMonitorByName($tabela['nazwa']);  			    
                         $this->_redirect('/searches/index/monitor_id/'.$monitor_id['id']);				
-					} else $this->_redirect('/monitors/add/');
-				} else $this->_redirect('/monitors/add/');
+					} else $this->_redirect('/monitory/add/');
+				} else $this->_redirect('/monitory/add/');
 			}
 		}
 			

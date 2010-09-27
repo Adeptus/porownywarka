@@ -26,9 +26,9 @@ class SearchesController extends Zend_Controller_Action {
 		$form = new Application_Form_Search();
 		$this->view->form = $form;
 		if (($this->requestIsAPostAndHasValidParams($form)) && ($this->getRequest()->getParam('id'))) {
-			$this->show_one_by_id($this->_getParam('id'));
+    		$this->view->item = $this->model->getMonitorById($this->_getParam('id'));
 		} else if (($this->requestIsAPostAndHasValidParams($form)) && ($this->getRequest()->getParam('nazwa'))) {
-			$this->show_one_by_name($this->_getParam('nazwa'));
+    		$this->view->item = $this->model->getMonitorById($this->_getParam('nazwa'));
 		}
 	}
 

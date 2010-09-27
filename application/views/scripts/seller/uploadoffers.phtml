@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="prepend-6 span-8">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'index',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona główna</a>
+	</div>
+	<div class="span-8 last">
+	<a href="<?php echo $this->url(
+		array(
+			'controller'=>'searches',
+			'action'    =>'index'
+		),
+		'default',
+		true) ?>">Strona kupującego</a>
+	</div>
+    <div> 
+        <form enctype="multipart/form-data" action="seller/uploadoffers" method="POST"> 
+            <input type="hidden" name="MAX_FILE_SIZE" value="3072000" /> 
+            <input name="plik" type="file" /> 
+            <input type="submit" value="Wyslij plik" /> 
+        </form> 
+    </div> 
+</div>
+
+

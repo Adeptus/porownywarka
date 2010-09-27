@@ -22,30 +22,21 @@ class Application_Model_DbTable_Delivery extends Application_Model_DatabaseGatew
 		return $row->toarray();
 	}
 
-	public function getDeliveryByCompanyId($id) {
-        $select = $this->select();
-        $select->where('id_firmy= ?', $id);
-        $row = $this->fetchRow($select);
-		if (!$row) {
-			return null;
-		}
-		return $row->toarray();
-	}
-
 	public function getDeliveryByCompanyIdAndNumber($id, $number) {
         $select = $this->select();
-        $select->where("id_firmy = $id AND numer = $number");
-//                                ->where('numer= ?', $number);
+        $select->where("id_firmy = ?", $id)
+               ->where("numer = ?"   , $number);
         $row = $this->fetchRow($select);
 		if (!$row) {
 			return null;
 		}
-		return $number;
+		return $row;
 	}
 
 	public function getDeliveriesByCompanyId($id) {
         $select = $this->select();
-        $select->where('id_firmy= ?', $id);
+        $select->where('id_firmy= ?', $id)
+               ->order("numer");
         $rows = $this->fetchAll($select);
 		if (!$rows) {
 			return null;

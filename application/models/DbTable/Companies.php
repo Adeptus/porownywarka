@@ -35,7 +35,7 @@ class Application_Model_DbTable_Companies extends Application_Model_DatabaseGate
                 $row->miasto        = $miasto;
                 $row->mail          = $mail;
                 $row->tel           = $tel;
-                $row->dostawa       = $dodefaultdeliverystawa;
+                $row->dostawa       = $dostawa;
                 $row->wspolrzedne   = $wspolrzedne;
                 $row->save();
                 return True;
